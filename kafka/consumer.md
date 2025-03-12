@@ -81,18 +81,8 @@ consumer = KafkaConsumer(
     - Dead Letter Queue (DLQ): Push error messages to a separate topic.
     ```python
     from confluent_kafka import Producer
-
+    
     dlq_producer = Producer({'bootstrap.servers': 'kafka:9092'})
-
-    for msg in consumer:
-        try:
-            process(msg)
-        except Exception as e:
-            dlq_producer.produce('dead_letter_topic', msg.value())
-            dlq_producer.flush()from confluent_kafka import Producer
-
-    dlq_producer = Producer({'bootstrap.servers': 'kafka:9092'})
-
     for msg in consumer:
         try:
             process(msg)
